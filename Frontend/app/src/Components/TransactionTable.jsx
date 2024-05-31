@@ -3,7 +3,7 @@ function TransactionTable(){
         <>
         <div className="outerLayout">
             <div className="search-select">
-                <div className="inputLayout">
+                <div className="searchBox">
                  <input type="text" placeholder="Searh here"/>
                 </div>
                 <div className="selectLayout">
@@ -13,30 +13,41 @@ function TransactionTable(){
                 </div>
             </div>
             <div className="tableLayout">
-                <table>
-                    <thead>
+                <table id="dataTable">
+                    <tr>
                         <th>Title</th>
                         <th>Description</th>
                         <th>Price</th>
                         <th>Sold</th>
                         <th>Image</th>
 
-                    </thead>
-                    <tbody>
-
-                    </tbody>
+                    </tr>
+                    <tr>
+                        <td>Book</td>
+                        <td>my books</td>
+                        <td>$100</td>
+                        <td>Yes</td>
+                        <td>🔥</td>
+                    </tr>
+                    <tr>
+                        <td>Book</td>
+                        <td>my books</td>
+                        <td>$100</td>
+                        <td>Yes</td>
+                        <td>🔥</td>
+                    </tr>
                 </table>
             </div>
             <div className="pageLayout">
                 <div className="paagNo">
-                    <p>Page No:</p>
+                    <p className="pageText">Page No:</p>
                 </div>
                 <div className="nextPrevious">
-                    <button>Next</button>
-                    <button>Previous</button>
+                    <button className="btn">Prev</button>
+                    <button className="btn">Next</button>
                 </div>
                 <div className="perPage">
-                    <p>Per Page:</p>
+                    <p className="pageText">Per Page:</p>
                 </div>
             </div>
         </div>
