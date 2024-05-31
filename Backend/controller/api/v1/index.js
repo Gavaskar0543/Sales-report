@@ -188,8 +188,9 @@ module.exports.pieChart = async (month) => {
 
 module.exports.combinedData = async (req, res) => {
   try {
+    console.log(req)
       const month = req.params.month; // Assuming the month is sent in the request body
-
+       console.log(month,'month')
       // Fetch data from the three APIs concurrently using Promise.all
       const [transactionsData, statisticsData, barChartData, pieChartData] = await Promise.all([
           this.products(month),
@@ -208,7 +209,7 @@ module.exports.combinedData = async (req, res) => {
 
       // Return the combined data as a JSON response
       res.status(200).json({
-        combinedData,
+       data: combinedData,
         success:true
       });
   } catch (error) {

@@ -9,13 +9,16 @@ const products = require('./controller/api/v1');
 /**for seeding database from thirdparty URL */
 //products.products_transactions();
 
-
-//json body parser
-server.use(express.json());
 //url body parser
 server.use(express.urlencoded({extended:true}));
+//json body parser
+server.use(express.json());
+const corsOptions = {
+    origin: '*'
+};
 
-server.use(cors());
+
+server.use(cors(corsOptions));
 //router middleware
 server.use('/',require('./router'));
 
