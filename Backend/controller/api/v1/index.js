@@ -114,14 +114,10 @@ async function calculateTotalUnsoldItems(month) {
 }
 
 
-
 //bar chart
 
 module.exports.barChart = async (month) => {
   try {
-      
-     
-
       // Define price ranges
       const priceRanges = [
           { min: 0, max: 100 },
@@ -217,3 +213,34 @@ module.exports.combinedData = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+
+
+/** serch result */
+const express = require('express');
+const app = express();
+
+app.get('/search', async (req, res) => {
+    const searchText = req.query.text; // Get search text from query parameter
+
+    try {
+     
+
+        // Improved search using regular expressions (case-insensitive)
+        const query = {
+            $or: [
+                { title: { $regex: new RegExp(searchText, 'i') } },
+                { description: { $regex: new RegExp(searchText, 'i') } },
+            ],
+        };
+
+        const results = await collection.find(query).toArray();
+        res.json(results);
+    } catch (error) {
+        console.error("Error performing search:", error);
+        res.status(500).json({ message: "Error searching products" }); // Send user-friendly error message
+    } finally {
+        // Optional: Close the connection if needed (consider connection pooling)
+        // await client.close();
+    }
+});

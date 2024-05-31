@@ -1,25 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useRef} from "react";
 import axios from 'axios';
 import { ROOT_URL } from "../Urls";
 function TransactionTable(){
-    const[product,setProduct] = useState([]);
-    const [currentPage,setCurrentPage] = useState(1)
-    const [perPage,setPerPage] = useState(10)
+    const[data,setdata] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
     const [search,setSearch] = useState('');
     const[currentMonth,setCurrentMonth] =useState('June')
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentItems = data.slice(startIndex, endIndex);
+
     useEffect(()=>{
         async function fetch(){
             const url = `${ROOT_URL}/sales/${currentMonth}`;
             console.log('url',url);
     
           const response = await axios.get(url);
-          console.log(response.data.data.transactions.product)
-          setProduct(response.data.data.transactions.product)
+       
+          setdata(response.data.data.transactions.product)
          
         
     }fetch()
     },[currentMonth])
+    
   const  handleSearch = async ()=>{
         const url = `${ROOT_URL}/sales/${currentMonth}`;
         console.log('url',url);
@@ -32,6 +38,22 @@ function TransactionTable(){
             alert(err.message);
         }
     }
+
+    const handlePrev = ()=>{
+        if(currentPage<=1){
+            return;
+        }
+        setCurrentPage(currentPage-1);
+
+
+    }
+    const handleNxt = ()=>{
+        if(currentPage <= totalPages-1){
+       setCurrentPage(currentPage+1);
+        }
+
+    }
+  
     return(
         <>
         <div className="outerLayout">
@@ -61,7 +83,7 @@ function TransactionTable(){
 
                     </tr></thead>
                     <tbody>
-                   {product.map((item,index)=>(
+                   {currentItems.map((item,index)=>(
                     <tr key={index}>
                         <td className="para">{item.title}</td>
                         <td><p className="para">{item.description}</p></td>
@@ -75,14 +97,14 @@ function TransactionTable(){
             </div>
             <div className="pageLayout">
                 <div className="paagNo">
-                    <p className="pageText">Page No:</p>
+                    <p className="pageText">Page No:{currentPage}</p>
                 </div>
                 <div className="nextPrevious">
-                    <button className="btn">Prev</button>
-                    <button className="btn">Next</button>
+                    <button onClick={handlePrev} className="btn">Prev</button>
+                    <button onClick={handleNxt} className="btn">Next</button>
                 </div>
                 <div className="perPage">
-                    <p className="pageText">Per Page:</p>
+                    <p className="pageText">Per Page:{itemsPerPage}</p>
                 </div>
             </div>
         </div>
