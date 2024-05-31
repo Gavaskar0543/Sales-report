@@ -1,1 +1,1 @@
-export const ROOT_URL ="https://8000-idx-sales-report-1717097331428.cluster-e3wv6awer5h7kvayyfoein2u4a.cloudworkstations.dev/api/v1"
+export const ROOT_URL ="https://wqt0x303-8000.inc1.devtunnels.ms/api/v1"

@@ -209,7 +209,7 @@ module.exports.combinedData = async (req, res) => {
 
       // Return the combined data as a JSON response
       res.status(200).json({
-       data: combinedData,
+       combinedData,
         success:true
       });
   } catch (error) {

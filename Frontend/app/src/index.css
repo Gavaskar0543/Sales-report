@@ -68,6 +68,15 @@ border: 1px solid rgb(64, 65, 65);
     border: 1px solid #ddd;
     padding: 8px;
   }
+#dataTable td{
+    text-wrap: wrap;
+    word-wrap: break-word;
+}
+.para{
+    text-wrap: wrap;
+    white-space:no-wrap;
+    
+}
 #dataTable tr:nth-child(even){
     background-color: #f2f2f2;
 }

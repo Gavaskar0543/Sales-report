@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import { ROOT_URL } from "../Urls";
 function TransactionTable(){
-    const[data,setdata] = useState([]);
+    const[product,setProduct] = useState([]);
     const [currentPage,setCurrentPage] = useState(1)
     const [perPage,setPerPage] = useState(10)
     const [search,setSearch] = useState('');
-    const[currentMonth,setCurrentMonth] =useState('March')
+    const[currentMonth,setCurrentMonth] =useState('June')
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    useEffect(()=>{
+        async function fetch(){
+            const url = `${ROOT_URL}/sales/${currentMonth}`;
+            console.log('url',url);
     
+          const response = await axios.get(url);
+          console.log(response.data.data.transactions.product)
+          setProduct(response.data.data.transactions.product)
+         
+        
+    }fetch()
+    },[currentMonth])
   const  handleSearch = async ()=>{
         const url = `${ROOT_URL}/sales/${currentMonth}`;
         console.log('url',url);
@@ -40,6 +51,7 @@ function TransactionTable(){
             </div>
             <div className="tableLayout">
                 <table id="dataTable">
+                    <thead>
                     <tr>
                         <th>Title</th>
                         <th>Description</th>
@@ -47,21 +59,18 @@ function TransactionTable(){
                         <th>Sold</th>
                         <th>Image</th>
 
+                    </tr></thead>
+                    <tbody>
+                   {product.map((item,index)=>(
+                    <tr key={index}>
+                        <td className="para">{item.title}</td>
+                        <td><p className="para">{item.description}</p></td>
+                        <td>{item.price}</td>
+                        <td>{item.sold ? 'Yes' : 'No'}</td>
+                        <td><img src={item.image} alt="img" width={100} /></td>
                     </tr>
-                    <tr>
-                        <td>Book</td>
-                        <td>my books</td>
-                        <td>$100</td>
-                        <td>Yes</td>
-                        <td>🔥</td>
-                    </tr>
-                    <tr>
-                        <td>Book</td>
-                        <td>my books</td>
-                        <td>$100</td>
-                        <td>Yes</td>
-                        <td>🔥</td>
-                    </tr>
+                   ))}
+                      </tbody>
                 </table>
             </div>
             <div className="pageLayout">
