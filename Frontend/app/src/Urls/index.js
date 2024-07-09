@@ -1,1 +1,1 @@
-export const ROOT_URL ="https://wqt0x303-8000.inc1.devtunnels.ms/api/v1"
+export const ROOT_URL ="https://8000-gavaskar054-salesreport-mh9q2mvd9io.ws-us115.gitpod.io/api/v1"

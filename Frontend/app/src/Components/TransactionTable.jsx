@@ -20,7 +20,7 @@ function TransactionTable(){
     
           const response = await axios.get(url);
        
-          setdata(response.data.data.transactions.product)
+          setdata(response.data.combinedData.transactions.product)
          
         
     }fetch()
