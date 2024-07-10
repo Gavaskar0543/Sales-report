@@ -5,35 +5,34 @@ import CanvasJSReact from '@canvasjs/react-charts';
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
  
-const App = () =>  {
-	
+const App = ({currMonth,data}) =>  {
+	const sortedByLabel = data.sort((a, b) => {
+		// Sort based on the lower bound of the range string
+		const rangeA = parseInt(a.label.split('-')[0]);
+		const rangeB = parseInt(b.label.split('-')[0]);
+		return rangeA - rangeB;
+	  });
+	  
 		const options = {
 			animationEnabled: true,
 			theme: "light2", // "light1", "light2", "dark1", "dark2"
 			title: {
-				text: "Top Free Android Apps - June 2018"
+				text:"Bar stats for - "+currMonth
 			},
 			axisY: {
-				title: "Number of Downloads",
+				title: "",
 				scaleBreaks: {
 				autoCalculate: true
 			}
 			},
 			axisX: {
-				title: "Apps",
+				title: "",
 				labelAngle: 0
 			},
 			data: [{
 				type: "column",
-				dataPoints: [
-					{ label: "WhatsApp Messenger", y: 68206498},
-					{ label: "Facebook Messenger", y: 55897709},
-					{ label: "SHAREit", y: 7570438},
-					{ label: "UC Browser", y: 17453224},
-					{ label: "MX Player", y: 6389443},
-					{ label: "Hotstar", y: 4815084},
-					{ label: "Truecaller", y: 7631644}	
-				]
+				dataPoints:sortedByLabel
+				
 			}]
 		}
 						

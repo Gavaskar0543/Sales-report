@@ -22,9 +22,7 @@ export default function Statistics({month,saleData}) {
         </ul> 
       
 
-          
-
-
+  
       </DataContainer>
     </StatisticLayout>
   )

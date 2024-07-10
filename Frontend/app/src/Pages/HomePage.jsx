@@ -8,7 +8,9 @@ import axios from 'axios';
 import { ROOT_URL } from "../Urls";
 const HomePage = () => {
   const[data,setdata] = useState([]);
-  const[currentMonth,setCurrentMonth] =useState('June')
+  const[currentMonth,setCurrentMonth] =useState('June');
+  //bar chart
+  const [barChartData,setBarChartData] = useState({})
   //statistic
   const [statisticData,setStatisticData] = useState({});
 
@@ -22,6 +24,7 @@ const HomePage = () => {
    
       setdata(response.data.combinedData.transactions.product)
       setStatisticData(response.data.combinedData.statistics)
+      setBarChartData(response.data.combinedData.barChart)
 
     
 }fetch()
@@ -33,7 +36,7 @@ const HomePage = () => {
     <MainContent>
     <TransactionTable data={data} currMonth={currentMonth} currMonthChange={setCurrentMonth}/>
     <Statistics month={currentMonth} saleData={statisticData} />
-    <BarChart />
+    <BarChart chartData={barChartData} month={currentMonth}/>
    
     </MainContent>
     </>
