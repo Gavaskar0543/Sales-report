@@ -1,31 +1,15 @@
 import { useEffect, useState ,useRef} from "react";
-import axios from 'axios';
 import { ROOT_URL } from "../Urls";
-function TransactionTable(){
-    const[data,setdata] = useState([]);
+function TransactionTable({data,currMonthChange,currMonth}){
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(5);
     const [search,setSearch] = useState('');
-    const[currentMonth,setCurrentMonth] =useState('June')
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     const totalPages = Math.ceil(data.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const currentItems = data.slice(startIndex, endIndex);
 
-    useEffect(()=>{
-        async function fetch(){
-            const url = `${ROOT_URL}/sales/${currentMonth}`;
-            console.log('url',url);
-    
-          const response = await axios.get(url);
-       
-          setdata(response.data.combinedData.transactions.product)
-         
-        
-    }fetch()
-    },[currentMonth])
-    
   const  handleSearch = async ()=>{
         const url = `${ROOT_URL}/sales/${currentMonth}`;
         console.log('url',url);
@@ -64,7 +48,7 @@ function TransactionTable(){
                 }} placeholder="Searh here"/>
                 </div>
                 <div className="selectLayout">
-                    <select value={currentMonth} onChange={(e)=>setCurrentMonth(e.target.value)}>
+                    <select value={currMonth} onChange={(e)=>currMonthChange(e.target.value)}>
                    {  months.map((month,index) =>
                         <option key={index} value={month}>{month}</option>
                      )}

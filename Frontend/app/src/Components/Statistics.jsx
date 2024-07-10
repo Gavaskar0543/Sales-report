@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styled from 'styled-components'
-export default function Statistics({month}) {
+export default function Statistics({month,saleData}) {
   return (
     <StatisticLayout>
       <TextContainer>
@@ -10,11 +10,21 @@ export default function Statistics({month}) {
         </Text>
       </TextContainer>
       <DataContainer>
-        <ul>
-          <li>Total Sale:10000</li>
-          <li>Total Sold Items:20</li>
-          <li>Tatal not sold Items:40</li>
-        </ul>
+        {/* "statistics": {
+            "totalSaleAmout": 179.7,
+            "totalSoldItems": 1,
+            "totalUnsoldItems": 2
+        }, */}
+       <ul>
+          <li>Total Sale:{saleData.totalSaleAmout}</li>
+          <li>Total Sold Items:{saleData.totalSoldItems}</li>
+          <li>Tatal not sold Items:{saleData.totalUnsoldItems}</li>
+        </ul> 
+      
+
+          
+
+
       </DataContainer>
     </StatisticLayout>
   )
