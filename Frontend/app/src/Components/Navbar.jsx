@@ -1,20 +1,68 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-export default function Navbar() {
+const StyledNavbar = styled.nav`
+display:flex;
+justify-content:space-between;
+align-items:center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:3rem;
+  margin-bottom:2rem;
+  transition: background-color 0.3s ease;
+
+  &.scrolled {
+    background-color: blue;
+  }
+    a{
+    text-decoration:none;
+    color:black;
+    }
+    ul{
+    display:flex;
+    width:300px;
+    justify-content:space-between;
+    align-items:center;
+    margin-right:20px;
+    }
+`;
+
+const Title = styled.p`
+font-size:1.4rem;
+margin-left:5px;
+color:red;
+font-weight:800;
+`
+
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+ 
   return (
-   <nav className='flex bg-black text-white px-2 py-2 justify-between items-center'>
-    <div className='title'>
-          <p className="text-2xl cursor-pointer font-bold text-red-500">Sales Report</p>
-    </div>
-    <div>
-    <ul style={{width:"300px"}} className='flex font-semibold justify-between px-2'>
-
-            <li className=''>Dashboard</li>
-            <li><a href='#bar-chart'> Bar view </a> </li>
-            <li><a href='#pie-chart'>  Pie view </a></li>
+    <StyledNavbar className={isScrolled ? 'scrolled' : ''}>
+      <div>
+        <Title>Sale Report</Title>
+      </div>
+      <div>
+        <ul type='none'>
+        <li> <a href='#bar-chart'>Dashboard</a> </li>
+        <li> <a href='#statistic'>Statistic view</a> </li>
+          <li> <a href='#bar-chart'>Bar view</a> </li>
         </ul>
-    </div>
+      </div>
+    </StyledNavbar>
+  );
+};
 
-   </nav>
-  )
-}
+export default Navbar;
