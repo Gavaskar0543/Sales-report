@@ -11,28 +11,38 @@ align-items:center;
   width: 100%;
   height:3rem;
   margin-bottom:2rem;
-  transition: background-color 0.3s ease;
+ 
 
   &.scrolled {
-    background-color: blue;
+ 
+    background-color: white;
+    
   }
     a{
     text-decoration:none;
     color:black;
+    font-weight:600;
     }
+    a:hover{
+    color:gray;
+    }
+
     ul{
     display:flex;
     width:300px;
     justify-content:space-between;
     align-items:center;
     margin-right:20px;
+    
     }
+    
+    
 `;
 
 const Title = styled.p`
 font-size:1.4rem;
 margin-left:5px;
-color:red;
+color:black;
 font-weight:800;
 `
 
@@ -56,7 +66,7 @@ const Navbar = () => {
       </div>
       <div>
         <ul type='none'>
-        <li> <a href='#bar-chart'>Dashboard</a> </li>
+        <li> <a href='/'>Dashboard</a> </li>
         <li> <a href='#statistic'>Statistic view</a> </li>
           <li> <a href='#bar-chart'>Bar view</a> </li>
         </ul>
